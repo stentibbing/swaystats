@@ -8,20 +8,21 @@ import (
 
 type Time struct{}
 
-func New() Time {
-	return Time{}
+func New() (Time, error) {
+	return Time{}, nil
 }
 
 func (t Time) Update(c chan block.Update, n string) {
-	c <- block.Update{
-		Name:  n,
-		Props: t.Construct(),
+	for {
+		c <- block.Update{
+			Name:  n,
+			Props: data(),
+		}
+		gotime.Sleep(1 * gotime.Second)
 	}
-	gotime.Sleep(1 * gotime.Second)
-	go t.Update(c, n)
 }
 
-func (t Time) Construct() block.Props {
+func data() block.Props {
 	ct := gotime.Now()
 
 	s := ct.Second()

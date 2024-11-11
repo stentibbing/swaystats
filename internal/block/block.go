@@ -2,7 +2,6 @@ package block
 
 type Block interface {
 	Update(c chan Update, name string)
-	Construct() Props
 }
 
 type Props struct {

@@ -34,7 +34,7 @@ func (sl *StatusLine) Render() {
 		existing, exists := sl.Blocks[update.Name]
 
 		if exists && existing.FullText == update.Props.FullText {
-			return
+			continue
 		}
 
 		sl.Blocks[update.Name] = update.Props
